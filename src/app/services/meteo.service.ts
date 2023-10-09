@@ -40,4 +40,9 @@ export class MeteoService {
     }
     return tempArray;
   }
+
+  fromKmToKnot(speed: number): number {
+    const knot = speed / 1.8;
+
+  }
 }
