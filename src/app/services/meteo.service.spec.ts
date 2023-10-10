@@ -23,7 +23,22 @@ describe('MeteoService', () => {
 
   it('should create forecast array', () => {
     const testObj = {
-      
+      hourly_units: {
+        temperature_2m: '°C',
+        relativehumidity_2m: '%',
+        precipitation_probability: '%',
+        cloudcover: '%',
+        windspeed_10m: 'km/h',
+      },
+      hourly: {
+        time: ['2023-10-09T00:00', '2023-10-09T01:00', '2023-10-09T02:00'],
+        temperature_2m: [19.5, 19.4, 18.9],
+        relativehumidity_2m: [93, 94, 94],
+        precipitation_probability: [0, 0, 0],
+        weathercode: [2, 45, 45],
+        cloudcover: [82, 62, 31],
+        windspeed_10m: [2.1, 3.3, 4.5],
+      },
     };
 
     const array = service.createForecastArray(testObj);
@@ -33,7 +48,22 @@ describe('MeteoService', () => {
 
   it('forecast array should have 3 elements', () => {
     const testObj = {
-      
+      hourly_units: {
+        temperature_2m: '°C',
+        relativehumidity_2m: '%',
+        precipitation_probability: '%',
+        cloudcover: '%',
+        windspeed_10m: 'km/h',
+      },
+      hourly: {
+        time: ['2023-10-09T00:00', '2023-10-09T01:00', '2023-10-09T02:00'],
+        temperature_2m: [19.5, 19.4, 18.9],
+        relativehumidity_2m: [93, 94, 94],
+        precipitation_probability: [0, 0, 0],
+        weathercode: [2, 45, 45],
+        cloudcover: [82, 62, 31],
+        windspeed_10m: [2.1, 3.3, 4.5],
+      },
     };
 
     const array = service.createForecastArray(testObj);
@@ -41,9 +71,24 @@ describe('MeteoService', () => {
     expect(array.length).toEqual(3);
   });
 
-  it('forecast array should have 3 elements', () => {
+  it('forecast array should contain forecast', () => {
     const testObj = {
-      
+      hourly_units: {
+        temperature_2m: '°C',
+        relativehumidity_2m: '%',
+        precipitation_probability: '%',
+        cloudcover: '%',
+        windspeed_10m: 'km/h',
+      },
+      hourly: {
+        time: ['2023-10-09T00:00', '2023-10-09T01:00', '2023-10-09T02:00'],
+        temperature_2m: [19.5, 19.4, 18.9],
+        relativehumidity_2m: [93, 94, 94],
+        precipitation_probability: [0, 0, 0],
+        weathercode: [2, 45, 45],
+        cloudcover: [82, 62, 31],
+        windspeed_10m: [2.1, 3.3, 4.5],
+      },
     };
     
     const comparisonObj = {
@@ -67,10 +112,10 @@ describe('MeteoService', () => {
   });
 
   it('should convert km/h to Knot', () => {
-    const startingSpeed = 100;
-    const speedKn = 54;
-    const result = service.fromKmToKnot(startingSpeed);
+    const startingSpeedArray = [100, 50, 255, 0, 1];
+    const speedKnArray = [54, 27, 138, 0, 1];
+    const result = startingSpeedArray.map(speed => service.fromKmHToKnot(speed));
 
-    expect(result).toEqual(speedKn);
+    expect(result).toEqual(speedKnArray);
   });
 });

@@ -41,8 +41,10 @@ export class MeteoService {
     return tempArray;
   }
 
-  fromKmToKnot(speed: number): number {
+  fromKmHToKnot(speed: number): number {
     const knot = speed / 1.8;
+    const roundedKnot = Math.round(knot);
 
+    return roundedKnot;
   }
 }
